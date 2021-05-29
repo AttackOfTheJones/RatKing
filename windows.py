@@ -35,6 +35,8 @@ class verify():
         button = tkinter.Button(self.verify_window, text="Enter", command=self.v_button)
         button.grid(row=3, column=1, sticky="w")
 
+        self.verify_window.mainloop()
+
     def v_button(self):
 
         #Retrieve User's API Key
@@ -57,5 +59,13 @@ class verify():
             tkinter.messagebox.showwarning(title='Error', message='Invalid Authorization Key!')
         else:
             self.quit()
-            
+
+
     
+class central():
+
+    def __init__(self):
+        self.central_window = None
+
+    def start(Key):
+        openai.api_key = Key
