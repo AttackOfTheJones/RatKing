@@ -1,7 +1,7 @@
 import openai
 import requests
-import tkinter
-import poopMan64 
+import tkinter as tk
+#import poopMan64
 
 #First window, which verifies gpt3 code
 class verify():
@@ -12,7 +12,7 @@ class verify():
 
     def start(self):
         #window initialization
-        self.verify_window = tkinter.Tk()
+        self.verify_window = tk.Tk()
         self.verify_window.title("Verification")
         self.verify_window.geometry("480x160")
 
@@ -26,15 +26,15 @@ class verify():
         self.verify_window.rowconfigure(2, weight=1)
 
         #label
-
+        tk.Label(self.verify_window, text="Please input your GPT-3 code:").grid(row=0, column=1, columnspan=3, sticky="w")
 
         #input box
-        self.code_box = tkinter.Entry(self.verify_window, width=70)
-        self.code_box.grid(row=1, column=0, columnspan=3, sticky='nsew', padx=(20, 0))
+        self.code_box = tk.Entry(self.verify_window, width=70)
+        self.code_box.grid(row=1, column=0, columnspan=3, sticky='nsew', padx=(15, 15))
 
         #button
-        button = tkinter.Button(self.verify_window, text="Enter", command=self.v_button)
-        button.grid(row=3, column=1, sticky="w")
+        button = tk.Button(self.verify_window, text="Enter", command=self.v_button)
+        button.grid(row=3, column=1, sticky="ew", pady=(0, 10))
 
         self.verify_window.mainloop()
 
@@ -57,7 +57,7 @@ class verify():
 
         #Verify Key
         if (r.reason == 'Unauthorized'):
-            tkinter.messagebox.showwarning(title='Error', message='Invalid Authorization Key!')
+            tk.messagebox.showwarning(title='Error', message='Invalid Authorization Key!')
         else:
             self.quit()
 
@@ -68,8 +68,8 @@ class central():
     def __init__(self):
         self.central_window = None
 
-    def start(Key):
-        openai.api_key = Key
+    def start(self, key):
+        openai.api_key = key
 
         #Define the window parametets
         self.central_window = tk.Tk()
@@ -77,10 +77,10 @@ class central():
         self.central_window.geometry("480x776")
 
         #Define the text boxes
-        self.textLog = tk.Text(self.central_window, state=DISABLED)
-        self.entry = tk.Text(self.central_window, state=NORMAL)
+        self.textLog = tk.Text(self.central_window, state="DISABLED")
+        self.entry = tk.Text(self.central_window, state="NORMAL")
 
-        
+
 
         #User presses 'Enter' key to submit text
         self.entry.bind('<Return>', self.enter)
@@ -94,16 +94,10 @@ class central():
             self.entry.delete()
             response = poopMan64.poop(text, Key)
 
-            self.textLog.state = NORMAL
+            self.textLog.state = "NORMAL"
             self.textLog.add('You: ' + text + '\n')
             self.textLog.add('The Stig: ' + response + '\n')
-            self.textLog.state = DISABLED
+            self.textLog.state = "DISABLED"
 
-            
-
-
-
-
-
-
-
+p = central()
+p.start()
