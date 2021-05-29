@@ -1,6 +1,7 @@
 import openai
 import requests
 import tkinter
+import poopMan64 
 
 #First window, which verifies gpt3 code
 class verify():
@@ -69,3 +70,40 @@ class central():
 
     def start(Key):
         openai.api_key = Key
+
+        #Define the window parametets
+        self.central_window = tk.Tk()
+        self.central_window.title('Ask The Stig')
+        self.central_window.geometry("480x776")
+
+        #Define the text boxes
+        self.textLog = tk.Text(self.central_window, state=DISABLED)
+        self.entry = tk.Text(self.central_window, state=NORMAL)
+
+        
+
+        #User presses 'Enter' key to submit text
+        self.entry.bind('<Return>', self.enter)
+
+        self.central_window.mainloop()
+
+    def enter(self):
+        text = self.entry.get()
+
+        if(text != None):
+            self.entry.delete()
+            response = poopMan64.poop(text, Key)
+
+            self.textLog.state = NORMAL
+            self.textLog.add('You: ' + text + '\n')
+            self.textLog.add('The Stig: ' + response + '\n')
+            self.textLog.state = DISABLED
+
+            
+
+
+
+
+
+
+
