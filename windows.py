@@ -74,30 +74,47 @@ class central():
         #Define the window parametets
         self.central_window = tk.Tk()
         self.central_window.title('Ask The Stig')
-        self.central_window.geometry("480x776")
+        self.central_window.geometry("480x240")
 
-        #Define the text boxes
-        self.textLog = tk.Text(self.central_window, state="DISABLED")
-        self.entry = tk.Text(self.central_window, state="NORMAL")
+        #window row and column setup
+        self.central_window.columnconfigure(0, weight=1)
+
+        self.central_window.rowconfigure(0, weight=1)
+        self.central_window.rowconfigure(1, weight=3)
+        self.central_window.rowconfigure(2, weight=1)
+        self.central_window.rowconfigure(3, weight=3)
+
+        #label
+        tk.Label(self.central_window, text="What is your situation?").grid(row=0, column=0)
+
+        #Define the first text box
+        #self.textLog = tk.Text(self.central_window, state='disabled')
+
+        self.entry_box = tk.Entry(self.central_window, state='normal')
+        self.entry_box.grid(row=1, column=0, sticky='nsew', padx=(15, 15))
+
+        #label
+        tk.Label(self.central_window, text="The Stig's response:").grid(row=2, column=0)
 
 
 
         #User presses 'Enter' key to submit text
-        self.entry.bind('<Return>', self.enter)
+        self.entry_box.bind('<Return>', self.enter)
 
         self.central_window.mainloop()
 
     def enter(self):
-        text = self.entry.get()
+        text = self.entry_box.get()
 
         if(text != None):
-            self.entry.delete()
-            response = poopMan64.poop(text, Key)
-
-            self.textLog.state = "NORMAL"
-            self.textLog.add('You: ' + text + '\n')
-            self.textLog.add('The Stig: ' + response + '\n')
-            self.textLog.state = "DISABLED"
+            print("funky")
+            # self.entry.delete()
+            # response = poopMan64.poop(text, Key)
+            #
+            # self.textLog.state = "NORMAL"
+            # self.textLog.add('You: ' + text + '\n')
+            # self.textLog.add('The Stig: ' + response + '\n')
+            # self.textLog.state = "DISABLED"
 
 p = central()
-p.start()
+p.start("4")
